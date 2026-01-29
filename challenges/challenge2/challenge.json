@@ -1,0 +1,21 @@
+{
+  "id": "friday-checkout-incident-mvp",
+  "stack": "nodejs-express-sqlite",
+  "skill": [
+    "debugging",
+    "ai-assisted-engineering"
+  ],
+  "area": [
+    "backend"
+  ],
+  "difficulty": 3,
+  "time_estimate_minutes": 75,
+  "concepts": [
+    "idempotency",
+    "retries",
+    "timeouts",
+    "caching",
+    "transaction boundaries",
+    "safe integration of AI-generated patches"
+  ]
+}
