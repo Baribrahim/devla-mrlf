@@ -1,79 +1,74 @@
-# Friday Checkout Incident (MVP Challenge)
+# Friday Checkout Incident — Duplicate Charge Investigation
 
-It’s Friday, 16:47.
+## Background
 
-Support is reporting a spike in **“Payment failed / charged twice”** complaints.
-Observability shows the checkout service’s payment error rate jumped after a deploy ~30 minutes ago.
-The CTO is asking for an update.
+You just joined an e-commerce company with a growing payment volume. The checkout service was built last quarter to process orders through a third-party payment provider. The service was designed to be resilient — it retries failed provider requests automatically to handle transient network issues.
 
-You’ve been given access to this checkout service. Your job is to **stabilize payments**.
+It's Friday, 16:47. Support is reporting a spike in **"Payment failed / charged twice"** complaints. Observability shows the checkout service's payment error rate jumped after a deploy ~30 minutes ago. The CTO is asking for an update.
 
----
+Engineering investigated the provider logs and confirmed that duplicate charges are being created for the same order. The provider is processing each call as a separate charge because the requests appear distinct to them.
 
-## What’s happening
+The team added idempotency handling a few months ago, but clearly something is wrong with how it's implemented.
 
-Under certain retry conditions (timeouts) and some follow-up requests, **the same order can be charged more than once**.
+## Your Task
 
-This is rare locally, but shows up in production when latency spikes and retries kick in.
+Find and fix the bug(s) causing duplicate charges under retry and repeated request conditions.
 
----
+The payment must be captured **exactly once** per `orderId`, even when:
+- The provider returns transient errors (timeouts)
+- The retry mechanism kicks in
+- Multiple checkout attempts occur in quick succession
+- A previously paid order is re-submitted
 
-## Objective
+## What "Done" Looks Like
 
-Fix the bug(s) causing **duplicate charges** while preserving existing behavior.
+- All existing tests pass (`npm test`)
+- A single `orderId` results in exactly one charge, regardless of retries
+- Transient failures are still retried and eventually succeed
+- Repeated checkout requests for paid orders return success without re-charging
+- The fix does not break backward compatibility
 
-✅ A correct solution must:
-- prevent duplicate charges for the same order during retries/timeouts
-- prevent duplicate charges on repeated requests for an already-paid order
-- keep the API contract unchanged
+## Constraints
 
----
+**You must not:**
+- Change the API contract (request/response shape for `POST /checkout`)
+- Disable the retry mechanism
+- Remove or disable caching entirely (it exists for performance reasons)
+- Modify any test files
 
-## Constraints (Non‑negotiable)
+**You must:**
+- Preserve backward compatibility with existing clients
+- Ensure retries continue to work for transient failures
+- Fix the root cause, not the symptoms
 
-- **Do not change** the public HTTP API shape (`POST /checkout`).
-- **Do not remove** retries (the system must remain resilient to timeouts).
-- **Do not disable** caching entirely (it exists for performance reasons).
-- Fixes should be **targeted**, not a rewrite.
+## Running the Project
 
----
-
-## Quickstart
-
-### Install
 ```bash
 npm install
-```
-
-### Run tests
-```bash
 npm test
 ```
 
-### Run server (optional)
-```bash
-npm start
+## File Overview
+
 ```
+src/
+  app.js                         # Express app setup and routes
+  routes/checkout.js             # Checkout route handler
+  services/chargeService.js      # Payment charge business logic
+  adapters/paymentProvider.js    # Fake payment provider with timeout simulation
+  db/ordersRepo.js               # Order and charge persistence
+  db/db.js                       # SQLite database setup
+  utils/cache.js                 # In-memory TTL cache
+  utils/retry.js                 # Retry utility with configurable conditions
+  utils/errors.js                # Custom error types
 
----
-
-## API
-
-### `POST /checkout`
-Body:
-```json
-{ "orderId": "ord_123" }
+tests/
+  checkout.visible.test.js       # Visible test suite
+  helpers.js                     # Test utilities
 ```
-
-Response (200):
-```json
-{ "orderId": "ord_123", "status": "paid", "chargeId": "ch_..." }
-```
-
----
 
 ## Notes
 
-- This repo uses a **fake payment provider adapter** (`src/adapters/paymentProvider.js`) that simulates real-world failure modes
-  (timeouts that may still result in a charge).
-- Visible tests guide you, hidden tests cover edge cases (including concurrency and timing).
+- The payment provider adapter simulates real-world failure modes (timeouts that may still result in a charge)
+- The idempotency store uses SQLite for persistence
+- Visible tests guide you, but hidden tests cover edge cases including concurrency and timing

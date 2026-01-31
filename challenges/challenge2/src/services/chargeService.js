@@ -21,8 +21,6 @@ async function chargeOrder(orderId) {
     return { status: "paid", chargeId: null };
   }
 
-  // BUG: idempotency key is generated per attempt and only stored after success.
-  // Under timeout, the provider may still create a charge, and retry will create another.
   const result = await retry(
     async () => {
       const attemptIdemKey = crypto.randomUUID?.() ?? crypto.randomBytes(16).toString("hex");
@@ -39,7 +37,6 @@ async function chargeOrder(orderId) {
       Orders.recordCharge(providerRes.chargeId, orderId, attemptIdemKey);
 
       Orders.markPaid(orderId);
-      // BUG: cache not invalidated after payment; can cause repeated requests to re-charge.
       return { status: "paid", chargeId: providerRes.chargeId };
     },
     {

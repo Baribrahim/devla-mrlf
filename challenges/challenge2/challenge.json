@@ -2,8 +2,7 @@
   "id": "friday-checkout-incident-mvp",
   "stack": "nodejs-express-sqlite",
   "skill": [
-    "debugging",
-    "ai-assisted-engineering"
+    "debugging"
   ],
   "area": [
     "backend"
