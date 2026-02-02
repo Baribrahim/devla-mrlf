@@ -1,0 +1,21 @@
+{
+    "name": "invisible-admin-dashboard",
+    "version": "1.0.0",
+    "description": "Debug challenge: Admin dashboard button never appears",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js",
+        "test": "jest tests/*.visible.test.js --runInBand",
+        "test:all": "jest --runInBand"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "better-sqlite3": "^9.4.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.2"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^6.3.4"
+    }
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashly - Analytics Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #00d9ff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      color: #888;
+      margin-bottom: 2rem;
+    }
+    
+    /* Login Section */
+    #login-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 1rem;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #00d9ff;
+    }
+    
+    button {
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, #00d9ff, #00ff88);
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+    }
+    
+    .btn-danger {
+      background: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+    
+    .btn-admin {
+      background: linear-gradient(90deg, #ff6b6b, #ffa502);
+      color: #fff;
+      font-weight: 600;
+      margin-left: 1rem;
+    }
+    
+    /* Dashboard Section */
+    #dashboard-section {
+      display: none;
+    }
+    
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .user-info {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .user-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .user-email {
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    
+    .user-role {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .role-admin {
+      background: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+    }
+    
+    .role-moderator {
+      background: rgba(255, 165, 2, 0.2);
+      color: #ffa502;
+    }
+    
+    .role-user {
+      background: rgba(0, 217, 255, 0.2);
+      color: #00d9ff;
+    }
+    
+    .role-undefined {
+      background: rgba(128, 128, 128, 0.2);
+      color: #888;
+    }
+    
+    /* Debug Panel */
+    .debug-panel {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .debug-title {
+      color: #666;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    
+    .token-display {
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.75rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      word-break: break-all;
+      color: #00ff88;
+      margin-bottom: 1rem;
+    }
+    
+    .token-decoded {
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.8rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      color: #00d9ff;
+      white-space: pre-wrap;
+    }
+    
+    .error-message {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .success-message {
+      color: #00ff88;
+      background: rgba(0, 255, 136, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .quick-login {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .quick-login-title {
+      color: #888;
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .quick-login-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .btn-quick {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: #aaa;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .btn-quick:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashly</h1>
+    <p class="subtitle">Analytics Dashboard</p>
+    
+    <!-- Login Section -->
+    <div id="login-section">
+      <div id="message-container"></div>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="admin@dashly.io" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="admin123" required>
+        </div>
+        <button type="submit" class="btn-primary">Sign In</button>
+      </form>
+      
+      <div class="quick-login">
+        <p class="quick-login-title">Quick login as:</p>
+        <div class="quick-login-buttons">
+          <button class="btn-quick" onclick="quickLogin('admin@dashly.io', 'admin123')">Admin</button>
+          <button class="btn-quick" onclick="quickLogin('mod@dashly.io', 'mod123')">Moderator</button>
+          <button class="btn-quick" onclick="quickLogin('user@dashly.io', 'user123')">User</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Dashboard Section -->
+    <div id="dashboard-section">
+      <div class="dashboard-header">
+        <div>
+          <h2 id="welcome-message">Welcome back!</h2>
+        </div>
+        <div>
+          <!-- Admin button - only shown if user.role === 'admin' -->
+          <span id="admin-button-container"></span>
+          <button class="btn-danger" onclick="logout()">Sign Out</button>
+        </div>
+      </div>
+      
+      <div class="user-info">
+        <div class="user-name" id="user-name">-</div>
+        <div class="user-email" id="user-email">-</div>
+        <span class="user-role" id="user-role">-</span>
+      </div>
+      
+      <div class="debug-panel">
+        <div class="debug-title">🔍 Token Debug Info</div>
+        <p style="color: #666; margin-bottom: 1rem; font-size: 0.85rem;">
+          This shows what's actually in your JWT token (decoded on the frontend):
+        </p>
+        <div class="token-decoded" id="token-payload">-</div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>

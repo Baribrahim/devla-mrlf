@@ -1,0 +1,20 @@
+{
+    "id": "invisible-admin-dashboard",
+    "stack": "nodejs-express-sqlite",
+    "skill": [
+        "debugging"
+    ],
+    "area": [
+        "backend",
+        "frontend"
+    ],
+    "difficulty": 2,
+    "time_estimate_minutes": 30,
+    "concepts": [
+        "JWT tokens",
+        "authentication vs authorization",
+        "token payload structure",
+        "role-based access control",
+        "frontend-backend data flow"
+    ]
+}
