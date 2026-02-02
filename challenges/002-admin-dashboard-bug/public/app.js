@@ -1,13 +1,10 @@
 /**
  * Dashly Frontend Application
- * 
+ *
  * This file handles:
  * - User login
  * - Token storage and decoding
  * - Role-based UI rendering (admin button visibility)
- * 
- * The admin button logic is CORRECT - it checks user.role === 'admin'
- * The bug is NOT here!
  */
 
 const API_BASE = '/api';
@@ -90,9 +87,6 @@ function decodeToken(token) {
 
 /**
  * Show the dashboard with user information
- * 
- * IMPORTANT: The admin button is shown based on the role in the token
- * This logic is CORRECT - the bug is elsewhere!
  */
 function showDashboard(user, token) {
     loginSection.style.display = 'none';
@@ -103,7 +97,7 @@ function showDashboard(user, token) {
     document.getElementById('user-name').textContent = user.name || 'Unknown';
     document.getElementById('user-email').textContent = user.email || 'Unknown';
 
-    // Display role (or show it's missing)
+    // Display role
     const roleElement = document.getElementById('user-role');
     const role = user.role;
 
@@ -115,8 +109,7 @@ function showDashboard(user, token) {
         roleElement.className = 'user-role role-undefined';
     }
 
-    // Show admin button ONLY if user.role === 'admin'
-    // This is the correct check! The bug is not here.
+    // Show admin button for admin users
     const adminButtonContainer = document.getElementById('admin-button-container');
 
     if (user.role === 'admin') {

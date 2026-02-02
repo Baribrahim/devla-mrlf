@@ -25,13 +25,10 @@ router.post('/login', (req, res) => {
     }
 
     // Generate JWT token for the authenticated user
-    // BUG: Role is NOT included in the token payload!
-    // The developer remembered to add user info but forgot the role
     const token = signToken({
         sub: user.id,
         email: user.email,
         name: user.name
-        // Missing: role: user.role
     });
 
     res.json({
@@ -41,7 +38,7 @@ router.post('/login', (req, res) => {
             id: user.id,
             email: user.email,
             name: user.name,
-            role: user.role  // Role is returned here but NOT in the token!
+            role: user.role
         }
     });
 });

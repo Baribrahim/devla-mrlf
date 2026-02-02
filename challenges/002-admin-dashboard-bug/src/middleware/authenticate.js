@@ -31,7 +31,7 @@ function authenticate(req, res, next) {
             id: decoded.sub,
             email: decoded.email,
             name: decoded.name,
-            role: decoded.role  // This will be undefined if role wasn't in token!
+            role: decoded.role
         };
 
         next();

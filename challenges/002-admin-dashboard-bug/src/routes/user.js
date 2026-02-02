@@ -29,8 +29,7 @@ router.get('/profile', authenticate, (req, res) => {
 
 /**
  * GET /api/user/me
- * Get user info from the token (for debugging)
- * This returns what's actually IN the token, not the database
+ * Get user info from the token
  */
 router.get('/me', authenticate, (req, res) => {
     res.json({
@@ -38,7 +37,7 @@ router.get('/me', authenticate, (req, res) => {
             id: req.user.id,
             email: req.user.email,
             name: req.user.name,
-            role: req.user.role  // This reveals the bug - will be undefined!
+            role: req.user.role
         }
     });
 });
