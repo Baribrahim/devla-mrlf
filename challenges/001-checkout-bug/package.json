@@ -5,7 +5,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "node src/app.js",
-    "test": "jest --runInBand"
+    "test": "jest tests/*.visible.test.js --runInBand",
+    "test:all": "jest --runInBand"
   },
   "dependencies": {
     "express": "^4.19.2",
