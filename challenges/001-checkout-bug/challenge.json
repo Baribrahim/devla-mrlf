@@ -1,20 +1,21 @@
 {
-  "id": "friday-checkout-incident-mvp",
-  "stack": "nodejs-express-sqlite",
-  "skill": [
-    "debugging"
-  ],
+  "id": "001-checkout-bug",
+  "title": "Friday Checkout Incident — Duplicate Charge Investigation",
+  "difficulty": "medium",
+  "time_estimate_minutes": 60,
+  "stack": "node",
   "area": [
     "backend"
   ],
-  "difficulty": 3,
-  "time_estimate_minutes": 75,
+  "skill": [
+    "debugging"
+  ],
   "concepts": [
     "idempotency",
     "retries",
     "timeouts",
     "caching",
-    "transaction boundaries",
-    "safe integration of AI-generated patches"
-  ]
+    "transaction boundaries"
+  ],
+  "ai_tier": "knowledgeable_peer"
 }

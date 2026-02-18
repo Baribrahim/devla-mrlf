@@ -1,20 +1,22 @@
 {
-    "id": "invisible-admin-dashboard",
-    "stack": "nodejs-express-sqlite",
-    "skill": [
-        "debugging"
-    ],
+    "id": "002-admin-dashboard-bug",
+    "title": "The Invisible Admin — Role Detection Mystery",
+    "difficulty": "easy",
+    "time_estimate_minutes": 30,
+    "stack": "node",
     "area": [
         "backend",
         "frontend"
     ],
-    "difficulty": 2,
-    "time_estimate_minutes": 30,
+    "skill": [
+        "debugging"
+    ],
     "concepts": [
         "JWT tokens",
         "authentication vs authorization",
         "token payload structure",
         "role-based access control",
         "frontend-backend data flow"
-    ]
+    ],
+    "ai_tier": "helpful_senior"
 }

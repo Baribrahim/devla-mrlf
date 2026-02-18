@@ -1,0 +1,23 @@
+{
+    "id": "005-webhook-wont-die",
+    "title": "The Webhook That Wouldn't Die — Retry Storm Recovery",
+    "difficulty": "hard",
+    "time_estimate_minutes": 90,
+    "stack": "node",
+    "area": [
+        "backend"
+    ],
+    "skill": [
+        "debugging",
+        "design"
+    ],
+    "concepts": [
+        "webhook idempotency",
+        "event deduplication",
+        "state machines",
+        "exactly-once processing",
+        "dead letter handling",
+        "concurrency"
+    ],
+    "ai_tier": "research_assistant"
+}

@@ -1,0 +1,22 @@
+{
+    "id": "004-rate-limiter-forgot",
+    "title": "The Rate Limiter That Forgot — Inverted Protection",
+    "difficulty": "medium",
+    "time_estimate_minutes": 45,
+    "stack": "node",
+    "area": [
+        "backend"
+    ],
+    "skill": [
+        "debugging"
+    ],
+    "concepts": [
+        "rate limiting",
+        "sliding window",
+        "middleware",
+        "IP extraction",
+        "time-based logic",
+        "state management"
+    ],
+    "ai_tier": "knowledgeable_peer"
+}

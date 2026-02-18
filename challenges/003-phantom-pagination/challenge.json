@@ -1,0 +1,21 @@
+{
+    "id": "003-phantom-pagination",
+    "title": "The Phantom Pagination — Missing & Duplicate Results",
+    "difficulty": "easy",
+    "time_estimate_minutes": 30,
+    "stack": "node",
+    "area": [
+        "backend"
+    ],
+    "skill": [
+        "debugging"
+    ],
+    "concepts": [
+        "pagination",
+        "SQL ORDER BY",
+        "offset/limit",
+        "stable sorting",
+        "API design"
+    ],
+    "ai_tier": "helpful_senior"
+}

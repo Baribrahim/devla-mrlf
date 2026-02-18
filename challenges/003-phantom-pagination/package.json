@@ -1,0 +1,19 @@
+{
+    "name": "003-phantom-pagination",
+    "version": "1.0.0",
+    "description": "The Phantom Pagination — Missing & Duplicate Results",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "test": "jest tests/ --verbose --forceExit",
+        "test:hidden": "jest tests_hidden/ --verbose --forceExit"
+    },
+    "dependencies": {
+        "better-sqlite3": "^11.0.0",
+        "express": "^4.21.0"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^7.0.0"
+    }
+}
