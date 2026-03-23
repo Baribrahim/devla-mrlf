@@ -68,56 +68,37 @@ Because the AI assistant is built into the platform, we capture every interactio
 
 ---
 
-## 5. Adaptive AI Pair Programmer
+## 5. AI Pair Programmer
 
-The AI assistant adapts based on **challenge difficulty** to mirror real-world pair programming dynamics. This is what makes difficulty engaging — it's not just harder code, it's a harder AI collaboration challenge.
+Every challenge includes the same AI assistant — a knowledgeable pair programmer that behaves consistently regardless of challenge difficulty. This mirrors reality: engineers at every level use the same models. **The challenge difficulty is the lever, not the AI.**
 
-### 🟢 Easy — "The Helpful Senior"
+### How It Works
 
-> *Like pair programming with a senior engineer who knows the codebase.*
+> *Like pair programming with a senior engineer who knows the tech stack but hasn't seen this specific codebase.*
 
-- AI gives detailed, contextual guidance when asked
-- Proactively suggests relevant approaches
-- Points out common pitfalls
-- Will give direct code snippets if asked
+- AI answers questions accurately and helpfully
+- Suggests approaches but lets the user drive the implementation
+- Reviews code and provides feedback when asked
+- Points out potential issues and edge cases
+- Keeps responses focused and actionable
+- Does **not** hand over complete solutions unprompted
 
-**What's tested:** Can you collaborate with a helpful AI to fix a real bug? Can you understand what it suggests and apply it correctly? Do you verify the fix?
+### Why One AI, Not Three
 
-**Target user:** Juniors, career switchers, anyone new to AI-assisted engineering.
+1. **Matches reality** — everyone uses the same GPT-4/Claude at work; what differs is how they use it
+2. **Challenge complexity is the natural lever** — harder code requires better prompting even with the same AI
+3. **Fairer scoring** — one AI means leaderboard comparisons are apples-to-apples within each difficulty
+4. **Simpler to maintain** — one system prompt template per challenge, not 3 variations × N challenges
+5. **No frustration** — users won't feel the AI is deliberately unhelpful on hard mode
 
-### 🟡 Medium — "The Knowledgeable Peer"
+### What Gets Measured
 
-> *Like pair programming with a peer who knows the tech but hasn't seen this specific code.*
+The AI collaboration score captures *how* someone uses the AI, not whether they can fight an intentionally unhelpful one:
 
-- AI answers questions accurately but doesn't volunteer solutions
-- Requires better prompting — vague questions get vague answers
-- Won't hand-hold through the implementation
-- Helps with concepts, syntax, and debugging hints
-
-**What's tested:** Can you guide the AI effectively? Can you provide sufficient context? Can you decompose the problem into good prompts?
-
-**Target user:** Mid-level engineers, juniors leveling up.
-
-### 🔴 Hard — "The Research Assistant"
-
-> *Like having a junior researcher who can look things up and draft code, but you make all the decisions.*
-
-- AI can research concepts and draft snippets
-- Requires precise, well-structured prompts to be useful
-- May give partially correct answers that need verification
-- User must orchestrate, verify, and own the architecture
-
-**What's tested:** Can you architect a solution and orchestrate AI as a tool? Can you spot when AI is wrong? Can you break a complex problem into AI-solvable pieces?
-
-**Target user:** Mid to senior engineers, anyone preparing for lead roles.
-
-### Why This Design Works
-
-1. **Easy is genuinely accessible** — newcomers aren't punished, they're supported
-2. **Difficulty scales in TWO dimensions** — harder code AND harder AI collaboration
-3. **Mirrors real career progression** — junior uses AI as a guide, senior uses AI as a tool
-4. **Teaches AI skills implicitly** — users learn to prompt better by experiencing the difference
-5. **Scoring adapts** — each level has its own scoring model (you don't compare easy and hard scores directly)
+- **Prompting quality** — are questions specific and context-rich?
+- **Verification discipline** — do they test AI suggestions before committing?
+- **Independence balance** — do they over-rely or under-use the AI?
+- **Iteration efficiency** — do they refine prompts or repeat the same question?
 
 ---
 
@@ -208,7 +189,7 @@ Each completion generates a score card with:
 ### In Scope
 - 5 backend challenges (Node.js) — 2 Easy, 2 Medium, 1 Hard
 - Browser-based environment: editor + AI chat + test runner
-- Adaptive AI assistant (behavior changes by difficulty)
+- AI pair programmer (consistent behavior, per-challenge context)
 - Server-side hidden test evaluation
 - Automated 4-dimension scoring + profile generation
 - Shareable score cards (OG image for social)
@@ -284,7 +265,7 @@ Each completion generates a score card with:
 ## 12. Launch Plan
 
 ### Pre-Launch (Week 1–2)
-- Ship 5 challenges with adaptive AI tuning
+- Ship 5 challenges with unified AI pair programmer
 - Build in public on LinkedIn/X
 - Recruit 20–30 beta testers from backend communities
 - Frame: "I'm building the Codility for AI-assisted backend engineering"
